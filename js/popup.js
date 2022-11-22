@@ -8,41 +8,53 @@ chrome.storage.sync.get(['isFocusMode', 'minutesElapsed'], (result) => {
 
     isFocusMode = result.isFocusMode;
 
-    if (isFocusMode && result.focusTimeStart) {
-        focusTimeStart = result.focusTimeStart;
+    updateImage(isFocusMode);
 
-        updateTime(focusTimeStart);
+    if (isFocusMode) {
+        updateTime(result.minutesElapsed);
+
+    }
+});
+
+chrome.storage.onChanged.addListener((changes) => {
+
+    console.log(changes)
+
+    if (changes.isFocusMode) {
+        updateImage(changes.isFocusMode.newValue);
+
     }
 
-    toggleFocusModeEl.checked = isFocusMode;
-
+    if (changes.minutesElapsed) {
+        updateTime(changes.minutesElapsed.newValue);
+    }
 
 });
 
-
-function updateTime(startTime) {
-
-    let minutesElapsed = Math.floor((Date.now() - startTime) / 60 / 1000);
-    timeElapsedEl.innerHTML = `${minutesElapsed} minutes`
-
-
-}
-
-function toggleFocusMode() {
+toggleFocusModeEl.onclick = function toggleFocusMode() {
 
     isFocusMode = !isFocusMode;
 
-    toggleFocusModeEl.checked = isFocusMode;
-
     chrome.storage.sync.set({ isFocusMode });
-
-    chrome.runtime.sendMessage({ startTimer: true });
-
 }
 
 
-toggleFocusModeEl.onchange = (event) => {
+function updateImage(newFocusMode) {
 
-    toggleFocusMode();
+    if (newFocusMode) {
+        toggleFocusModeEl.src = '../images/desk-lamp-on.png';
+        timeElapsedEl.style.display = 'block';
+
+    } else if (newFocusMode === false) {
+        toggleFocusModeEl.src = '../images/desk-lamp-off.png';
+        timeElapsedEl.style.display = 'none';
+
+    }
+
+}
+
+function updateTime(minutesElapsed) {
+
+    timeElapsedEl.innerHTML = `${minutesElapsed} MIN`
 
 }

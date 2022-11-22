@@ -16,26 +16,39 @@ let startTime;
 
 let minuteInterval;
 
-chrome.runtime.onMessage.addListener(
-    function (request, sender, sendResponse) {
-        if (request.startTimer) {
+chrome.storage.onChanged.addListener(function (changes, namespace) {
+
+    if (changes.isFocusMode) {
+
+        const isFocusMode = changes.isFocusMode.newValue;
+
+        if (isFocusMode === true) {
 
             startTime = Date.now();
 
-            chrome.storage.sync.set({ focusTimeStart: startTime });
+            //update time (0 min)
+            updateTime(startTime);
 
+            chrome.storage.sync.set({ startTime });
 
+            //update time every 60 seconds
             minuteInterval = setInterval(() => {
                 updateTime(startTime);
             }, 60000);
 
-        } else if (request.startTimer === false) {
+        } else if (isFocusMode === false) {
 
-            clearInterval(minuteInterval);
+            chrome.storage.sync.get(['minutesElapsed', 'settings'], (result) => {
 
+                endFocusMode(result.minutesElapsed, result.settings.duration);
+
+            });
         }
+
     }
-);
+
+
+});
 
 
 function updateTime(startTime) {
@@ -45,24 +58,36 @@ function updateTime(startTime) {
 
     chrome.storage.sync.set({ minutesElapsed });
 
+    //Check if focus session should end
     chrome.storage.sync.get(['isFocusMode', 'settings'], (result) => {
 
-        console.log(result);
-
-        const isFocusMode = result.isFocusMode;
-
-        if (!isFocusMode) {
-            clearInterval(minuteInterval);
-        }
-
         const settings = result.settings;
-        if (settings.duration <= minutesElapsed) {
-            clearInterval(minuteInterval);
 
+        if (!result.isFocusMode || settings.duration <= minutesElapsed) {
+
+            endFocusMode(minutesElapsed, settings.duration);
 
         }
-
 
     });
+}
+
+
+function endFocusMode(minutesElapsed, duration) {
+
+    console.log('Ending focus mode!');
+
+    clearInterval(minuteInterval);
+
+    if (minutesElapsed > duration * .9) {
+
+
+
+    } else if (minutesElapsed > duration * .5) {
+
+
+
+    }
+
 
 }

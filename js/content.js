@@ -7,20 +7,20 @@ chrome.storage.sync.get(['isFocusMode', 'settings'], (result) => {
 });
 
 
-chrome.storage.onChanged.addListener(function (changes, namespace) {
+chrome.storage.onChanged.addListener((changes) => {
 
     console.log(changes)
 
-    //if settings change - change scope settings
+    //if settings change - change tab settings
     if (changes.settings) {
-        settings = changes.settings.newValue;
+        applySettings(changes.settings.newValue);
 
         console.log(changes.settings.newValue);
     }
 
     if (changes.isFocusMode.newValue) {
         applySettings();
-    } else if (!changes.isFocusMode.newValue) {
+    } else if (changes.isFocusMode.newValue === false) {
         removeAppliedSettings()
     }
 
@@ -52,8 +52,11 @@ function removeAppliedSettings() {
 
 function CloseTab() {
 
-    if (window.confirm("This URL is blocked while in depp work mode. Go back to focus on work by pressing OK")) {
+    if (window.confirm("This URL is blocked while in deep work mode. Go back to focus on work by pressing OK")) {
         chrome.runtime.sendMessage({ closeMe: true })
+    } else {
+        alert("You've exited deep work mode");
+        chrome.storage.sync.set({ isFocusMode: false });
     }
 }
 

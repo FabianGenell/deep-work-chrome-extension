@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>DEEP WORK MODE</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="popup.css">
@@ -13,16 +13,16 @@
 
 <body>
     <div class="popup-container">
+
         <header>
             <h1>DEEP WORK MODE</h1>
         </header>
-        <div class="image-container">
-            <div class="timer">
-                <h2 id="timeElapsed"></h2>
-            </div>
-            <img src="../images/desk-lamp-off.png" alt="Toggle deep work mode">
-        </div>
 
+        <div class="image-container">
+            <h2 class="timer" id="timeElapsed"></h2>
+
+            <img src="../images/desk-lamp-off.png" id="toggleFocusMode" alt="Toggle deep work mode">
+        </div>
 
         <a href="../settings/settings.html" class="settings-button">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
@@ -35,9 +35,10 @@
                     4.6 1.9 1.9 4.6 1.9Z" />
             </svg>
         </a>
+
     </div>
 
-    <script src="./js/popup.js"></script>
+    <script src="../js/popup.js"></script>
 
 
 </body>
