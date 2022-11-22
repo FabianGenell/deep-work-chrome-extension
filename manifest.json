@@ -11,15 +11,15 @@
       "128": "images/icon-128.png"
     },
     "default_title": "My YT Bookmarks",
-    "default_popup": "popup.html"
+    "default_popup": "./popup/popup.html"
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "./js/background.js"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["./content/content.js"]
+      "js": ["./js/content.js"]
     }
   ],
   "permissions": ["webNavigation", "tabs", "storage"]

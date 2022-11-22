@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>Deep Work Mode</title>
     <link rel="stylesheet" href="popup.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
@@ -14,16 +13,18 @@
 <body>
     <header>
         <h2>Deep Work Mode</h2>
-
+        <h2 id="timeElapsed"></h2>
     </header>
 
     <div class="content-container">
         <div class="toggle-button">
             <input id="toggleFocusMode" type="checkbox">
-            <span class="slider"></span>
+            <div class="slider">
+                <div class="knob"></div>
+            </div>
         </div>
 
-        <a href="./popup-settings.html" class="settings-button">
+        <a href="./settings/settings.html" class="settings-button">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
                 <path d="m19.4 
                     44-1-6.3q-.95-.35-2-.95t-1.85-1.25l-5.9 2.7L4 30l5.4-3.95q-.1-.45-.125-1.025Q9.25 24.45 9.25 
@@ -38,7 +39,7 @@
 
 
 
-    <script src="popup.js"></script>
+    <script src="./js/popup.js"></script>
 </body>
 
 </html>
