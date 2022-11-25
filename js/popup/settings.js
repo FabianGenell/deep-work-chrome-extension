@@ -1,4 +1,5 @@
 const formEl = document.getElementById('settingsForm');
+const editSitesButtonEl = document.getElementById('editSites');
 
 let settings;
 

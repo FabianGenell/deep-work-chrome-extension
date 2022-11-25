@@ -1,0 +1,90 @@
+
+
+.sites-container {
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: auto;
+}
+/* INPUT */
+.input-site {
+    border: 1px solid #58585865;
+    position: relative;
+}
+
+.input-site input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: none;
+    font-size: 1rem;
+    padding: 10px 20px;
+}
+
+.input-site input:focus-visible {
+    outline: 1px solid rgb(163, 163, 163);
+    background-color: rgba(255, 242, 226, 0.394);
+
+}
+
+.input-site .add-button {
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    background-color: rgba(128, 128, 128, 0.314);
+    border: none;
+    padding: 5px;
+    border-radius: 15px;
+    color: rgb(23, 23, 23);
+    transition: .3s;
+}
+
+.input-site .add-button:hover {
+    cursor: pointer;
+    background-color: rgba(27, 131, 29, 0.314);
+    color: rgb(23, 23, 23);
+}
+
+
+/* SITE LIST*/
+.site {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border: 1px solid #58585865;
+    cursor: pointer;
+
+}
+.site:hover {
+    background-color: rgba(255, 242, 226, 0.394);
+}
+
+.site .delete-button {
+    background-color: rgb(219, 0, 0);
+    border: none;
+    width: 20px;
+    height: 20px;
+    color: rgb(255, 198, 198);
+    border-radius: 100%;
+}
+
+
+/* SCROLLBAR */
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.431);
+    border-radius: 10px;
+  }
+  

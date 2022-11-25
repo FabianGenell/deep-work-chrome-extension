@@ -17,11 +17,13 @@ chrome.storage.onChanged.addListener((changes) => {
 
         console.log(changes.settings.newValue);
     }
+    if (changes.isFocusMode) {
+        if (changes.isFocusMode.newValue === true) {
+            applySettings();
+        } else if (changes.isFocusMode.newValue === false) {
+            removeAppliedSettings()
+        }
 
-    if (changes.isFocusMode.newValue) {
-        applySettings();
-    } else if (changes.isFocusMode.newValue === false) {
-        removeAppliedSettings()
     }
 
 });
